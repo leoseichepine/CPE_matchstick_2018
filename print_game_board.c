@@ -6,13 +6,12 @@
 */
 
 #include "include/my.h"
+#include "include/matchstick.h"
 #include <unistd.h>
 
-int free_board(char **game_board, int lines)
+int free_board(char **game_board)
 {
-    int height = lines + 2;
-
-    for (int i = 0; i < height; i++)
+    for (int i = 0; game_board[i] != NULL; i++)
         free(game_board[i]);
     free(game_board);
     return (0);
@@ -56,23 +55,10 @@ char **fill_board(int lines)
     return (game_board);
 }
 
-void print_game_board(int lines)
+void print_game_board(char **game_board)
 {
-    char **game_board = fill_board(lines);
-
     for (int i = 0; game_board[i] != NULL; i++) {
         my_putstr(game_board[i]);
         my_putchar('\n');
     }
-    free_board(game_board, lines);
-}
-
-int main(int ac, char *av[])
-{
-    if (ac < 2) {
-        write(2, "Not enough arguments\n", 21);
-        return (84);
-    }
-    print_game_board(my_atoi(av[1]));
-    return (0);
 }

@@ -9,11 +9,10 @@
 
 int my_atoi(char *str)
 {
-    int i;
     int len = my_strlen(str);
     int newnb = 0;
 
-    while (*str != '\0') {
+    while (*str != '\0' && *str != '\n') {
         newnb = newnb * 10 + (*str - '0');
         str++;
     }

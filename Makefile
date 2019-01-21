@@ -5,9 +5,12 @@
 ## Makefile compilation programme
 ##
 
-NAME	=	print_game_board
+NAME	=	matchstick
 
-SRC 	=	print_game_board.c\
+SRC 	=	main.c\
+			print_game_board.c\
+			game_loop.c\
+			update_game_board.c
 
 RM		=	rm -f
 
