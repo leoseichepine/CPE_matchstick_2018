@@ -34,21 +34,11 @@ int find_matches_left_on_line(char *line)
 
 int update_board(game_board_t *game_board, int line_number, int matches_number)
 {
-    int x;
-    int m_line = find_matches_left_on_line(game_board->board[line_number]);
+    int x = find_last_match(game_board->board[line_number]);
 
-    if (matches_number > m_line) {
-        write(1, "Error : Not enough matches on this line\n", 41);
-        return (80);
-    }
-    if (matches_number > game_board->matches_max) {
-        my_printf("Error: You cannot remove more than %i matches per turn\n",
-                game_board->matches_max);
-        return (81);
-    }
-    x = find_last_match(game_board->board[line_number]);
     for (int i = 0; i < matches_number; i++)
         game_board->board[line_number][x - i] = ' ';
+    my_printf("Player removes %i match(es) from line %i\n", matches_number, line_number);
     game_board->matches_left -= matches_number;
     return (0);
 }

@@ -10,7 +10,10 @@ NAME	=	matchstick
 SRC 	=	main.c\
 			print_game_board.c\
 			game_loop.c\
-			update_game_board.c
+			update_game_board.c\
+			game_board.c\
+			error_handling_game_loop.c\
+			player.c
 
 RM		=	rm -f
 
