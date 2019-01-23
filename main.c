@@ -24,11 +24,14 @@ int error_handling(int ac, char *av[])
 
 int main(int ac, char *av[])
 {
-    game_board_t *game_board = create_game_board(my_atoi(av[1]), my_atoi(av[2]));
+    game_board_t *game_board;
 
     if (error_handling(ac, av) == 84)
         return (84);
+    game_board = create_game_board(my_atoi(av[1]),
+    my_atoi(av[2]));
     print_game_board(game_board->board);
+    my_putchar('\n');
     loop_game(game_board);
     free_board(game_board->board);
     free(game_board);

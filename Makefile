@@ -13,7 +13,8 @@ SRC 	=	main.c\
 			update_game_board.c\
 			game_board.c\
 			error_handling_game_loop.c\
-			player.c
+			player.c\
+			computer.c
 
 RM		=	rm -f
 

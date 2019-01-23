@@ -29,12 +29,25 @@ char **load_board(int height, int width)
     return (game_board);
 }
 
-char **fill_board(int lines)
+void print_matches(int lines, char **game_board)
 {
-    int height = lines + 2; // 6
-    int width = 2 * lines + 1; // 9
+    int height = lines + 2;
+    int width = 2 * lines + 1;
     int demilen = width / 2;
     int off = 0;
+
+    for (int y = 1; y < height - 1; y++) {
+        for (int x = 0; x < width; x++)
+            if (x <= demilen + off && x >= demilen - off)
+                game_board[y][x] = '|';
+        off++;
+    }
+}
+
+char **fill_board(int lines)
+{
+    int height = lines + 2;
+    int width = 2 * lines + 1;
     char **game_board = load_board(height, width);
 
     for (int y = 0; y < height; y++) {
@@ -46,12 +59,7 @@ char **fill_board(int lines)
                 game_board[y][x] = '*';
         }
     }
-    for (int y = 1; y < height - 1; y++) {
-        for (int x = 0; x < width; x++)
-            if (x <= demilen + off && x >= demilen - off)
-                game_board[y][x] = '|';
-        off++;
-    }
+    print_matches(lines, game_board);
     return (game_board);
 }
 

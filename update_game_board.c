@@ -13,23 +13,15 @@
 int find_last_match(char *line)
 {
     int tmp = 0;
+    int i = 0;
 
-    for (int x = 0; line[x] != '\0'; x++) {
-        if (line[x] == '|')
+    for (i; line[i] != '\0'; i++) {
+        if (line[i] == '|')
             tmp = 1;
-        if (line[x + 1] != '|' && tmp == 1)
-            return (x);
+        if (line[i] != '|' && tmp == 1)
+            return (i - 1);
     }
-}
-
-int find_matches_left_on_line(char *line)
-{
-    int res = 0;
-
-    for (int x = 0; line[x] != '\0'; x++)
-        if (line[x] == '|')
-            res++;
-    return (res);
+    return (0);
 }
 
 int update_board(game_board_t *game_board, int line_number, int matches_number)
@@ -38,7 +30,6 @@ int update_board(game_board_t *game_board, int line_number, int matches_number)
 
     for (int i = 0; i < matches_number; i++)
         game_board->board[line_number][x - i] = ' ';
-    my_printf("Player removes %i match(es) from line %i\n", matches_number, line_number);
     game_board->matches_left -= matches_number;
     return (0);
 }
