@@ -1,8 +1,8 @@
 ##
-## EPITECH PROJECT, 2018
-## Makefile_compil
+## EPITECH PROJECT, 2019
+## CPE_matchstick_2018
 ## File description:
-## Makefile compilation programme
+## __DESCRIPTION__
 ##
 
 NAME	=	matchstick

@@ -30,9 +30,9 @@ SRC	=	concat_params.c				\
 		my_itoa.c					\
 		my_putstroct.c				\
 		my_printf.c					\
-		funcmpf_1.c					\
-		funcmpf_2.c					\
-		funcmpf_3.c					\
+		func_mpf_1.c				\
+		func_mpf_2.c				\
+		func_mpf_3.c				\
 		find_map_size.c				\
 		my_show_word_array.c		\
 		is_square_of_size.c
