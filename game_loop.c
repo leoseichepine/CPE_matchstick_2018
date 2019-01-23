@@ -14,7 +14,8 @@ int loop_game(game_board_t *game_board)
 {
     while (game_board->matches_left > 0) {
         my_printf("Your turn:\n");
-        player_plays(game_board);
+        if (player_plays(game_board) == 110)
+            return (0);
         if (game_board->matches_left == 1) {
             my_printf("Player won, GG\n");
             return (1);

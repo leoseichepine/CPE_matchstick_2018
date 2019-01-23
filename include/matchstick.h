@@ -10,6 +10,12 @@
 
 #include <unistd.h>
 
+typedef enum
+{
+    true,
+    false,
+}bool_t;
+
 typedef struct s_game_board
 {
     char **board;
@@ -22,7 +28,7 @@ typedef struct s_game_board
 
 int computer_plays(game_board_t *game_board);
 int player_plays(game_board_t *game_board);
-int get_line_number(void);
+int get_line_number(game_board_t *game_board);
 int get_matches_number(void);
 int check_line_number(int line_number, game_board_t *game_board);
 int check_matches_number(int line_number, int matches_number, game_board_t *game_board);

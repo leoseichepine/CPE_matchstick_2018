@@ -13,6 +13,8 @@ int my_atoi(char *str)
     int sign = 0;
     int i = 0;
 
+    if (!str || *str == 'EOF')
+        return (84);
     while (str[i] != '\0' && str[i] != '\n') {
         if (str[i] == '-')
             sign++;
