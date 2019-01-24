@@ -10,6 +10,16 @@
 #include <unistd.h>
 #include <stdio.h>
 
+int find_matches_on_line(char *line)
+{
+    int res = 0;
+
+    for (int x = 0; line[x] != '\0'; x++)
+        if (line[x] == '|')
+            res++;
+    return (res);
+}
+
 int find_last_match(char *line)
 {
     int tmp = 0;

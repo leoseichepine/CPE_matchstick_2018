@@ -10,16 +10,6 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int find_matches_on_line(char *line)
-{
-    int res = 0;
-
-    for (int x = 0; line[x] != '\0'; x++)
-        if (line[x] == '|')
-            res++;
-    return (res);
-}
-
 int get_matches_number(void)
 {
     char *tmp_matches = NULL;
@@ -55,13 +45,13 @@ int get_line_number(game_board_t *game_board)
 
     my_printf("Line: ");
     err = getline(&tmp_line, &len, stdin);
+    if (is_str_num(tmp_line) == false) {
+        write(1, "Error: invalid input (positive number expected)\n", 48);
+        return (101);
+    }
     if (err == -1) {
         write(1, "Error: This line is out of range\n", 33);
         return (110);
-    }
-    else if (is_str_num(tmp_line) == false) {
-        write(1, "Error: invalid input (positive number expected)\n", 48);
-        return (101);
     } else {
         line_number = my_atoi(tmp_line);
         free(tmp_line);
@@ -88,6 +78,8 @@ int player_plays(game_board_t *game_board)
     line_number = get_line_number(game_board);
     if (line_number == 110)
         return (110);
+    while (line_number == 101)
+        line_number = get_line_number(game_board);
     while (check_line_number(line_number, game_board) != 0)
         line_number = get_line_number(game_board);
     matches_on_line = find_matches_on_line(game_board->board[line_number]);
