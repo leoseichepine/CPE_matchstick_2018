@@ -17,11 +17,11 @@ int loop_game(game_board_t *game_board)
         if (player_plays(game_board) == 110)
             return (0);
         if (game_board->matches_left == 1) {
-            my_printf("Player won, GG\n");
+            my_printf("I lost... snif... but I'll get you next time !\n");
             return (1);
         }
         if (game_board->matches_left == 0) {
-            my_printf("IA won, you suck, it plays randomly\n");
+            my_printf("You lost, too bad...\n");
             return (2);
         }
         my_printf("AI's turn...\n");
