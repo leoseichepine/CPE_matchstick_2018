@@ -30,6 +30,8 @@ int main(int ac, char *av[])
         return (84);
     game_board = create_game_board(my_atoi(av[1]),
     my_atoi(av[2]));
+    if (game_board == NULL)
+        return (84);
     print_game_board(game_board->board);
     my_putchar('\n');
     loop_game(game_board);

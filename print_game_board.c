@@ -21,6 +21,8 @@ char **load_board(int height, int width)
 {
     char **game_board = (malloc(sizeof(char *) * (height + 1)));
 
+    if (!game_board)
+        return (NULL);
     for (int i = 0; i < height; i++) {
         game_board[i] = malloc(sizeof(char) * (width + 1));
         game_board[i][width] = '\0';
@@ -50,6 +52,8 @@ char **fill_board(int lines)
     int width = 2 * lines + 1;
     char **game_board = load_board(height, width);
 
+    if (game_board == NULL)
+        return (NULL);
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
             game_board[y][x] = ' ';

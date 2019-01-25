@@ -19,7 +19,7 @@ int get_matches_number(void)
     my_printf("Matches: ");
     if (getline(&tmp_matches, &len, stdin) == -1) {
         write(1, "Error: This line is out of range\n", 33);
-        return (111);
+        return (110);
     }
     matches_number = my_atoi(tmp_matches);
     free(tmp_matches);
@@ -63,7 +63,7 @@ void end_player_turn(game_board_t *game_board, int line_number,
                     int matches_number)
 {
     update_board(game_board, line_number, matches_number);
-    my_printf("Player removes %i match(es) from line %i\n\n",
+    my_printf("Player removes %i match(es) from line %i\n",
     matches_number, line_number);
     print_game_board(game_board->board);
 }

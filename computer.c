@@ -9,6 +9,7 @@
 #include "include/matchstick.h"
 #include <unistd.h>
 #include <stdio.h>
+#include <time.h>
 
 int create_computer_matches(game_board_t *game_board, int computer_line)
 {
@@ -16,8 +17,10 @@ int create_computer_matches(game_board_t *game_board, int computer_line)
     int lower = 1;
     int check;
 
+    srand(time(NULL));
     random_matches = (rand() % (game_board->matches_max - lower + 1) + lower);
     check = find_matches_on_line(game_board->board[computer_line]);
+    my_printf("CHECK = %i\n", check);
     if (random_matches > check)
         create_computer_matches(game_board, computer_line);
     else
@@ -31,6 +34,7 @@ int create_computer_line(game_board_t *game_board)
     int check;
 
     random_line = (rand() % (game_board->lines - lower + 1) + lower);
+    my_printf("IA LIGNE = %i\n", random_line);
     check = find_matches_on_line(game_board->board[random_line]);
     if (check == 0)
         create_computer_line(game_board);

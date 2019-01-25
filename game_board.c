@@ -27,11 +27,15 @@ game_board_t *create_game_board(int lines, int matches_max)
 {
     game_board_t *game_board = malloc(sizeof(game_board_t));
 
+    if (!game_board || lines > 100)
+        return (NULL);
     game_board->lines = lines;
     game_board->matches_max = matches_max;
     game_board->height = lines + 2;
     game_board->width = 2 * lines + 1;
     game_board->board = fill_board(lines);
+    if (game_board->board == NULL)
+        return (NULL);
     game_board->matches_left = find_matches_left(game_board->board);
     return (game_board);
 }

@@ -14,7 +14,7 @@
 int check_line_number(int line_number, game_board_t *game_board)
 {
     if (line_number <= 0 || line_number > game_board->lines) {
-        write(1, "Error: This line is out of range\n", 33); 
+        write(1, "Error: This line is out of range\n", 33);
         return (102);
     } else
         return (0);

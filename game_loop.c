@@ -24,7 +24,7 @@ int loop_game(game_board_t *game_board)
             my_printf("You lost, too bad...\n");
             return (2);
         }
-        my_printf("AI's turn...\n");
+        my_printf("\nAI's turn...\n");
         computer_plays(game_board);
     }
     return (0);
