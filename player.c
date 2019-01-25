@@ -64,6 +64,8 @@ void end_player_turn(game_board_t *game_board, int line_number,
     my_printf("Player removes %i match(es) from line %i\n",
     matches_number, line_number);
     print_game_board(game_board->board);
+    if (game_board->matches_left > 1)
+        my_putchar('\n');
 }
 
 int player_plays(game_board_t *game_board)

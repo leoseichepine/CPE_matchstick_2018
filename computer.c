@@ -23,21 +23,19 @@ int find_matches_on_line(char *line)
 
 int create_computer_matches(game_board_t *game_board, int computer_line)
 {
-    int random_matches;
-    int lower = 1;
+    int random_matches = 0;
 
-    srand(time(0));
-    random_matches = (rand() % (game_board->matches_max - lower + 1) + lower);
+    random_matches = (rand() % game_board->matches_max + 1);
+    if (find_matches_on_line(game_board->board[computer_line]) == 1)
+        random_matches = 1;
     return (random_matches);
 }
 
 int create_computer_line(game_board_t *game_board)
 {
     int random_line;
-    int lower = 1;
 
-    random_line = (rand() % (game_board->lines - lower + 1) + lower);
-    // my_printf("AI line = %i\n", random_line);
+    random_line = (rand() % game_board->lines + 1);
     return (random_line);
 }
 
@@ -49,9 +47,13 @@ int computer_plays(game_board_t *game_board)
     computer_line = create_computer_line(game_board);
     while (find_matches_on_line(game_board->board[computer_line]) == 0)
         computer_line = create_computer_line(game_board);
+    computer_matches = create_computer_matches(game_board, computer_line);
+    while (computer_matches > find_matches_on_line(game_board->board[computer_line]))
+        computer_matches = create_computer_matches(game_board, computer_line);
     update_board(game_board, computer_line, computer_matches);
     my_printf("AI removes %i match(es) from line %i\n", computer_matches,
     computer_line);
     print_game_board(game_board->board);
-    my_putchar('\n');
+    if (game_board->matches_left > 1)
+        my_putchar('\n');
 }
