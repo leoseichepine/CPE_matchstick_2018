@@ -18,7 +18,6 @@ int get_matches_number(void)
 
     my_printf("Matches: ");
     if (getline(&tmp_matches, &len, stdin) == -1) {
-        write(1, "Error: This line is out of range\n", 33);
         return (110);
     }
     matches_number = my_atoi(tmp_matches);
@@ -50,7 +49,6 @@ int get_line_number(game_board_t *game_board)
         return (101);
     }
     if (err == -1) {
-        write(1, "Error: This line is out of range\n", 33);
         return (110);
     } else {
         line_number = my_atoi(tmp_line);
@@ -84,6 +82,8 @@ int player_plays(game_board_t *game_board)
         line_number = get_line_number(game_board);
     matches_on_line = find_matches_on_line(game_board->board[line_number]);
     matches_number = get_matches_number();
+    if (matches_number == 110)
+        return (110);
     err = check_matches_number(matches_on_line, matches_number, game_board);
     if (err == 84)
         player_plays(game_board);
