@@ -23,11 +23,8 @@ int find_matches_on_line(char *line)
 
 int create_computer_matches(game_board_t *game_board, int computer_line)
 {
-    int random_matches = 0;
+    int random_matches = 1;
 
-    random_matches = (rand() % game_board->matches_max + 1);
-    if (find_matches_on_line(game_board->board[computer_line]) == 1)
-        random_matches = 1;
     return (random_matches);
 }
 
