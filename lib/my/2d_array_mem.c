@@ -19,30 +19,30 @@ int free_2d_array(char **buffer, int rows)
     return (0);
 }
 
-int find_biggest_square(char **map, int rows, int cols, int x, int y)
-{
-    int res;
-
-    for (int square_size = cols - 1; square_size > 0; square_size--) {
-        for (x; x < rows - square_size; x++) {
-            for (y; y < cols - square_size; y++) {
-                res = is_square_of_size(map, x, y, square_size);
-                if (res == 1) {
-                    modify_map(map, x, y, square_size);
-                    break;
-                }
-            }
-            y = 0;
-            if (res == 1)
-                break;
-        }
-        x = 0;
-        y = 0;
-        if (res == 1)
-            break;
-    }
-    return (0);
-}
+// int find_biggest_square(char **map, int rows, int cols, int x, int y)
+// {
+//     int res;
+//
+//     for (int square_size = cols - 1; square_size > 0; square_size--) {
+//         for (x; x < rows - square_size; x++) {
+//             for (y; y < cols - square_size; y++) {
+//                 res = is_square_of_size(map, x, y, square_size);
+//                 if (res == 1) {
+//                     modify_map(map, x, y, square_size);
+//                     break;
+//                 }
+//             }
+//             y = 0;
+//             if (res == 1)
+//                 break;
+//         }
+//         x = 0;
+//         y = 0;
+//         if (res == 1)
+//             break;
+//     }
+//     return (0);
+// }
 
 int skip_first_line(char const *str)
 {

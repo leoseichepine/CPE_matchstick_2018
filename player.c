@@ -43,9 +43,11 @@ int get_line_number(game_board_t *game_board)
     char *tmp_line = NULL;
     size_t len = 0;
     int line_number = 0;
+    int err = 0;
 
     my_printf("Line: ");
-    if (getline(&tmp_line, &len, stdin) == - 1)
+    err = getline(&tmp_line, &len, stdin);
+    if (err == -1)
         return (110);
     else if (is_str_num(tmp_line) == false) {
         write(1, "Error: invalid input (positive number expected)\n", 48);
@@ -61,7 +63,7 @@ void end_player_turn(game_board_t *game_board, int line_number,
                     int matches_number)
 {
     update_board(game_board, line_number, matches_number);
-    my_printf("Player removes %i match(es) from line %i\n",
+    my_printf("Player removed %i match(es) from line %i\n",
     matches_number, line_number);
     print_game_board(game_board->board);
     if (game_board->matches_left > 0)
@@ -77,7 +79,9 @@ int player_plays(game_board_t *game_board)
 
     if (line_number == 110)
         return (110);
-    while (line_number == 111 || check_line_number(line_number, game_board) != 0)
+    while (line_number == 111)
+        line_number = get_line_number(game_board);
+    while (check_line_number(line_number, game_board) != 0)
         line_number = get_line_number(game_board);
     matches_on_line = find_matches_on_line(game_board->board[line_number]);
     matches_number = get_matches_number();
