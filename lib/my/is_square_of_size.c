@@ -1,8 +1,8 @@
 /*
-** EPITECH PROJECT, 2018
-** is_square_of_size
+** EPITECH PROJECT, 2019
+** CPE_matchstick_2018
 ** File description:
-**
+** __DESCRIPTION__
 */
 
 #include <stdlib.h>

@@ -45,7 +45,8 @@ int computer_plays(game_board_t *game_board)
     while (find_matches_on_line(game_board->board[computer_line]) == 0)
         computer_line = create_computer_line(game_board);
     computer_matches = create_computer_matches(game_board, computer_line);
-    while (computer_matches > find_matches_on_line(game_board->board[computer_line]))
+    while (computer_matches >
+        find_matches_on_line(game_board->board[computer_line]))
         computer_matches = create_computer_matches(game_board, computer_line);
     update_board(game_board, computer_line, computer_matches);
     my_printf("AI removed %i match(es) from line %i\n", computer_matches,

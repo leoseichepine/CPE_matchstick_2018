@@ -10,16 +10,6 @@
 #include <unistd.h>
 #include <stdio.h>
 
-
-int check_line_number(int line_number, game_board_t *game_board)
-{
-    if (line_number == 0 || line_number > game_board->lines) {
-        write(1, "Error: This line is out of range\n", 33);
-        return (112);
-    } else
-        return (0);
-}
-
 int check_matches_number(int matches_on_line, int matches_number,
                         game_board_t *game_board)
 {
