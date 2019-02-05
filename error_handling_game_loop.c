@@ -10,20 +10,30 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int check_matches_number(int matches_on_line, int matches_number,
-                        game_board_t *game_board)
+int is_error_matches(game_board_t *game_board, int matches_number,
+                    int line_number)
 {
+    int on_line = find_matches_on_line(game_board->board[line_number]);
+
     if (matches_number <= 0) {
-        write(1, "Error: You have to remove at least one match\n", 45);
+        my_printf("Error: you have to remove at least one match\n");
         return (84);
     }
-    else if (matches_number > game_board->matches_max) {
-        my_printf("You cannot removes more than %i matches per turn\n",
+    if (matches_number > on_line) {
+        my_printf("Error: not enough matches on this line\n");
+        return (84);
+    }
+    if (matches_number > game_board->matches_max) {
+        my_printf("Error: you cannot remove more than %i matches per turn\n",
         game_board->matches_max);
         return (84);
     }
-    else if (matches_number > matches_on_line) {
-        write(1, "Error: Not enough matches on this line\n", 39);
+}
+
+int is_error_line(int line, game_board_t *game_board)
+{
+    if (line <= 0 || line > game_board->lines) {
+        my_printf("Error: This line is out of range\n");
         return (84);
     }
     return (0);

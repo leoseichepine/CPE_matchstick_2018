@@ -25,7 +25,6 @@ int get_matches_number(game_board_t *game_board, int line_number)
     size_t len = 0;
     int matches_number;
     int err;
-    int on_line = find_matches_on_line(game_board->board[line_number]);
 
     my_printf("Matches: ");
     err = getline(&tmp_matches, &len, stdin);
@@ -38,18 +37,8 @@ int get_matches_number(game_board_t *game_board, int line_number)
         return (84);
     }
     matches_number = my_atoi(tmp_matches);
-    if (matches_number <= 0) {
-        my_printf("Error: you have to remove at least one match\n");
+    if (is_error_matches(game_board, matches_number, line_number) == 84)
         return (84);
-    }
-    if (matches_number > on_line) {
-        my_printf("Error: not enough matches on this line\n");
-        return (84);
-    }
-    if (matches_number > game_board->matches_max) {
-        my_printf("Error: you cannot remove more than %i matches per turn\n",
-        game_board->matches_max);
-    }
     free(tmp_matches);
     return (matches_number);
 }
@@ -72,10 +61,8 @@ int get_line_number(game_board_t *game_board)
         return (84);
     }
     line_number = my_atoi(tmp_line);
-    if (line_number <= 0 || line_number > game_board->lines) {
-        my_printf("Error: This line is out of range\n");
+    if (is_error_line(line_number, game_board) == 84)
         return (84);
-    }
     free(tmp_line);
     return (line_number);
 }
@@ -93,12 +80,9 @@ void end_player_turn(game_board_t *game_board, int line_number,
 
 int player_plays(game_board_t *game_board)
 {
-    int line_number = 0;
-    int matches_number = 0;
-    int on_line = 0;
+    int line_number = get_line_number(game_board);
+    int matches_number;
 
-    line_number = get_line_number(game_board);
-    my_printf("line number = %i\n", line_number);
     if (line_number == 111)
         return (111);
     while (line_number == 84) {
