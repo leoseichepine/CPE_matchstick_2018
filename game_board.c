@@ -23,19 +23,32 @@ int find_matches_left(char **game_board)
     return (res);
 }
 
-game_board_t *create_game_board(int lines, int matches_max)
+int error_args(int lines, int matches_max)
 {
-    game_board_t *game_board = malloc(sizeof(game_board_t));
+    if (matches_max <= 0) {
+        my_printf("Matches number must be positive\n");
+        return (84);
+    }
+    if (lines == 1 && matches_max >= lines)
+        return (84);
+    if (lines > 99 || lines < 1) {
+        my_printf("Line number must be between 0 and 100\n");
+        return (84);
+    }
+    return (0);
+}
 
-    if (!game_board || lines > 100)
-        return (NULL);
+int create_game_board(int lines, int matches_max, game_board_t *game_board)
+{
+    if (error_args(lines, matches_max) == 84)
+        return (84);
     game_board->lines = lines;
     game_board->matches_max = matches_max;
     game_board->height = lines + 2;
     game_board->width = 2 * lines + 1;
     game_board->board = fill_board(lines);
     if (game_board->board == NULL)
-        return (NULL);
+        return (84);
     game_board->matches_left = find_matches_left(game_board->board);
-    return (game_board);
+    return (0);
 }

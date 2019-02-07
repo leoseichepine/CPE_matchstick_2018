@@ -38,7 +38,7 @@ int check_matches_number(int line_number, int matches_number,
 int find_last_match(char *line);
 int find_matches_on_line(char *line);
 int find_matches_left(char **game_board);
-game_board_t *create_game_board(int lines, int matches_max);
+int create_game_board(int lines, int matches_max, game_board_t *game_board);
 int loop_game(game_board_t *game_board);
 int update_board(game_board_t *game_board, int line_number, int matches_number);
 int free_board(char **game_board);

@@ -24,18 +24,26 @@ int error_handling(int ac, char *av[])
 
 int main(int ac, char *av[])
 {
-    game_board_t *game_board;
+    game_board_t *game_board = malloc(sizeof(game_board_t));
+    int err;
+    int winner;
 
     if (error_handling(ac, av) == 84)
         return (84);
-    game_board = create_game_board(my_atoi(av[1]),
-    my_atoi(av[2]));
-    if (game_board == NULL)
+    err = create_game_board(my_atoi(av[1]),
+    my_atoi(av[2]), game_board);
+    if (err == 84) {
+        free(game_board);
         return (84);
+    }
     print_game_board(game_board->board);
     my_putchar('\n');
-    loop_game(game_board);
+    winner = loop_game(game_board);
     free_board(game_board->board);
     free(game_board);
+    if (winner == 2)
+        return (2);
+    if (winner == 1)
+        return (1);
     return (0);
 }
