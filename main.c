@@ -22,28 +22,32 @@ int error_handling(int ac, char *av[])
     }
 }
 
+void free_everything(game_board_t *game_board)
+{
+    free_board(game_board->board);
+    free(game_board);
+}
+
 int main(int ac, char *av[])
 {
     game_board_t *game_board = malloc(sizeof(game_board_t));
     int err;
-    int winner;
 
-    if (error_handling(ac, av) == 84)
+    if (error_handling(ac, av) == 84) {
+        free(game_board);
         return (84);
-    err = create_game_board(my_atoi(av[1]),
-    my_atoi(av[2]), game_board);
-    if (err == 84) {
+    }
+    if (create_game_board(my_atoi(av[1]), my_atoi(av[2]), game_board) == 84) {
         free(game_board);
         return (84);
     }
     print_game_board(game_board->board);
     my_putchar('\n');
-    winner = loop_game(game_board);
-    free_board(game_board->board);
-    free(game_board);
-    if (winner == 2)
+    if (loop_game(game_board) == 2) {
+        free_everything(game_board);
         return (2);
-    if (winner == 1)
+    } else {
+        free_everything(game_board);
         return (1);
-    return (0);
+    }
 }
