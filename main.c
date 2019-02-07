@@ -28,6 +28,12 @@ void free_everything(game_board_t *game_board)
     free(game_board);
 }
 
+void init_game_board(game_board_t *game_board)
+{
+    print_game_board(game_board->board);
+    my_putchar('\n');
+}
+
 int main(int ac, char *av[])
 {
     game_board_t *game_board = malloc(sizeof(game_board_t));
@@ -41,8 +47,7 @@ int main(int ac, char *av[])
         free(game_board);
         return (84);
     }
-    print_game_board(game_board->board);
-    my_putchar('\n');
+    init_game_board(game_board);
     if (loop_game(game_board) == 2) {
         free_everything(game_board);
         return (2);
